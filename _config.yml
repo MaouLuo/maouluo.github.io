@@ -5,7 +5,7 @@
 # Site
 title: 杂货铺
 subtitle:
-description: 
+description: 记录自己的世界罢了
 keywords:
 author: Maou
 language: zh-CN #en
@@ -15,7 +15,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://ifnot.fun
 root: /
-permalink: :year/:id/  #:year/:month/:day/:title/
+permalink: :year/:month/:title/ #:year/:id/  #:year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
@@ -79,5 +79,7 @@ theme: next #landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:MaouLuo/MaouLuo.github.io.git
+  repo: 
+    github: git@github.com:MaouLuo/MaouLuo.github.io.git
+    coding: git@e.coding.net:maou/myblog.git
   branch: master
