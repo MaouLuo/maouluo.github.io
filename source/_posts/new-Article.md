@@ -1,7 +1,9 @@
 ---
 title: new Article
 date: 2019-10-15 17:15:44
-tags:
+tags: 
+	- test
+	- life
 ---
 
 #### 第一段
