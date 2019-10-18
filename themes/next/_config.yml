@@ -70,9 +70,9 @@ footer:
 
   powered:
     # Hexo link (Powered by Hexo).
-    enable: false
+    enable: true
     # Version info of Hexo after Hexo link (vX.X.X).
-    version: true
+    version: false
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
@@ -128,8 +128,8 @@ menu:
   首页: / || home
   #about: /about/ || user
   标签: /tags/ || tags
-  #categories: /categories/ || th
-  时间轴: /archives/ || archive
+  categories: /categories/ || th
+  世界线: /archives/ || link
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -247,12 +247,14 @@ scroll_to_more: true
 # Automatically excerpt description in homepage as preamble text.
 excerpt_description: true
 
+# 列表页自动摘录
 # Automatically excerpt (Not recommend).
 # Use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: true
   length: 100
 
+# 查看更多按钮
 # Read more button
 # If true, the read more button would be displayed in excerpt section.
 read_more_btn: true
@@ -262,7 +264,7 @@ post_meta:
   item_text: true
   created_at: true
   updated_at:
-    enable: true
+    enable: false
     another_day: true
   categories: true
 
@@ -648,25 +650,25 @@ changyan:
 # You can get your appid and appkey from https://leancloud.cn
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: false # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version
-  appid: # Your leancloud application appid
-  appkey: # Your leancloud application appkey
+  enable: true # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version
+  appid: ShaCrLgQk520CPAtBMQOhvdB-gzGzoHsz # Your leancloud application appid
+  appkey: 4P7h8F3rs6Qj8AEECMV5J1zC # Your leancloud application appkey
   notify: false # Mail notifier. See: https://github.com/xCss/Valine/wiki
   verify: false # Verification code
   placeholder: Just go go # Comment box placeholder
-  avatar: mm # Gravatar style
+  avatar:  robohash #mm # Gravatar style
   guest_info: nick,mail,link # Custom comment header
   pageSize: 10 # Pagination size
   language: # Language, available values: en, zh-cn
-  visitor: false # leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html
-  comment_count: true # If false, comment count will only be displayed in post page, not in home page
+  visitor: true # leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html
+  comment_count: false # If false, comment count will only be displayed in post page, not in home page
   recordIP: false # Whether to record the commenter IP
-  serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
+  serverURLs:  # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
   #post_meta_order: 0
 
 # LiveRe comments system
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-livere_uid:  MTAyMC80NzEwOS8yMzYwOQ
+livere_uid:  #MTAyMC80NzEwOS8yMzYwOQ
 
 # Gitalk
 # Demo: https://gitalk.github.io
