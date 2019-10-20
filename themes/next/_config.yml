@@ -125,14 +125,17 @@ scheme: Muse
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
 menu:
-  首页: / || home
+  home: / || home
   #about: /about/ || user
-  标签: /tags/ || tags
+  tags: /tags/ || tags
   categories: /categories/ || th
-  世界线: /archives/ || link
+  archives: /archives/ || link
+  #test: /test/ || link 
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
+  #favorite: /favorite/ || fa-star
+
 
 # Enable / Disable menu icons / item badges.
 menu_settings:

@@ -5,6 +5,7 @@ tags:
 	- test
 	- life
 categories: 测试
+favorite: 1
 ---
 
 #### 第一段
