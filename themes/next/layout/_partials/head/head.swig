@@ -70,6 +70,16 @@
   <script src="{{ pace_js_uri }}"></script>
 {%- endif %}
 
+{% if theme.daovoice %}
+ <script>
+   (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/${your_app_id}.js","daovoice")
+   daovoice('init', {
+     app_id: "{{theme.daovoice_app_id}}"
+   });
+   daovoice('update');
+ </script>
+{% endif %}
+
 {# Export some HEXO Configurations to Front-End #}
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
@@ -104,3 +114,6 @@
     sidebarPadding: 40
   };
 </script>
+
+
+

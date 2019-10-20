@@ -83,3 +83,7 @@ deploy:
     github: git@github.com:MaouLuo/MaouLuo.github.io.git
     coding: git@e.coding.net:maou/myblog.git
   branch: master
+
+# 实时联系
+daovoice: true
+daovoice_app_id: 7c60e27d
