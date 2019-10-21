@@ -215,10 +215,11 @@
         {{ post.content }}
       {%- endif %}
 
-      
+      <!-- 文章底部显示结束内容
       {% if not is_index %}
         {% include 'passage-end-tag.swig' %}
       {% endif %}
+      -->
       
     </div>
 
