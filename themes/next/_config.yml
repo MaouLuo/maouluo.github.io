@@ -43,7 +43,7 @@ favicon:
   small: /images/d_16.png
   medium: /images/d_32.png
   apple_touch_icon: /d_128png
-  safari_pinned_tab: /images/logo.svg
+  safari_pinned_tab: /images/d.svg
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -740,7 +740,7 @@ add_this_id:
 # ---------------------------------------------------------------
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+baidu_analytics: 778a5c914669bf2fd34e6b6a33083f74 # <app_id>
 
 # Growingio Analytics
 # Copyright 2015-2018 GrowingIO, Inc. More info available at https://www.growingio.com
