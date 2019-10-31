@@ -108,8 +108,8 @@ creative_commons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
-#scheme: Mist
+#scheme: Muse
+scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
 
@@ -129,7 +129,7 @@ menu:
   #about: /about/ || user
   tags: /tags/ || tags
   categories: /categories/ || th
-  archives: /archives/ || link
+  #archives: /archives/ || link
   #test: /categories/test/ || link 
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
@@ -150,8 +150,8 @@ menu_settings:
 
 sidebar:
   # Sidebar Position.
-  #position: left
-  position: right
+  position: left
+  #position: right
 
   # Manual define the sidebar width. If commented, will be default for:
   # Muse | Mist: 320
@@ -271,6 +271,7 @@ post_meta:
     another_day: true
   categories: true
 
+# 文章统计
 # Post wordcount display settings
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
 symbols_count_time:
@@ -289,7 +290,8 @@ wechat_subscriber:
   qcode: #/uploads/wechat-qcode.jpg
   #description: Subscribe to my blog by scanning my public wechat account.
 
-# Reward (Donate)   #打赏
+#打赏
+# Reward (Donate)   
 reward_settings:
   # If true, reward would be displayed in every article by default.
   # You can show or hide reward in a specific article throuth `reward: true | false` in Front-matter.
@@ -302,7 +304,8 @@ reward:
   #alipay: /images/alipay.png
   #bitcoin: /images/bitcoin.png
 
-# Related popular posts   热门文章列表
+# 热门文章列表
+# Related popular posts   
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
   enable: false
@@ -731,7 +734,7 @@ rating:
 
 # AddThis Share. See: https://www.addthis.com
 # Go to https://www.addthis.com/dashboard to customize your tools.
-add_this_id:
+add_this_id: ra-5dba7c991d31dc5a
 
 
 # ---------------------------------------------------------------
@@ -782,7 +785,7 @@ firestore:
   apiKey: # Required
   projectId: # Required
 
-# 底部游客统计
+# 底部游客统计 不算子
 # Show Views / Visitors of the website / page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
 busuanzi_count:
