@@ -4,6 +4,7 @@ title:
   category: 分类
   tag: 标签
   schedule: 日程表
+  products: 产品
 menu:
   home: 首页
   archives: 世界线
@@ -16,6 +17,7 @@ menu:
   commonweal: 公益 404
   favorite: 收藏
   test: 测试
+  products: 产品
 sidebar:
   overview: 站点概览
   toc: 文章目录

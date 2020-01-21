@@ -53,7 +53,7 @@ rss:
 
 footer:
   # Specify the date when the site was setup. If not defined, current year will be used.
-  #since: 2015
+  since: 2019
 
   # Icon between year and copyright info.
   icon:
@@ -91,6 +91,7 @@ footer:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
 
+# 版权申明
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
 # Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
@@ -99,7 +100,7 @@ footer:
 creative_commons:
   license: by-nc-sa
   sidebar: true
-  post: true
+  post: false
   language: deed.zh
 
 
@@ -124,13 +125,15 @@ scheme: Mist
 # Value after `||` delimiter is the name of Font Awesome icon. If icon (with or without delimiter) is not specified, question icon will be loaded.
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
-menu:
+# http://www.fontawesome.com.cn/faicons/   图标库
+menu: # 直接以分类名新建路由即可访问
   home: / || home
   #about: /about/ || user
+  products: /categories/产品/ || product-hunt
   tags: /tags/ || tags
-  categories: /categories/ || th
+  #categories: /categories/ || th    
   #archives: /archives/ || link
-  #test: /categories/test/ || link 
+  #test: /categories/技术/ || link 
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -150,8 +153,7 @@ menu_settings:
 
 sidebar:
   # Sidebar Position.
-  position: left
-  #position: right
+  position: right #left
 
   # Manual define the sidebar width. If commented, will be default for:
   # Muse | Mist: 320
@@ -191,7 +193,7 @@ site_state: true
 # Value after `||` delimiter is the name of Font Awesome icon. If icon (with or without delimiter) is not specified, globe icon will be loaded.
 social:
   #GitHub: https://github.com/yourname || github
-  #E-Mail: mailto:yourname@gmail.com || envelope
+  E-Mail: mailto:maou@ifnot.fun || envelope
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -734,7 +736,7 @@ rating:
 
 # AddThis Share. See: https://www.addthis.com
 # Go to https://www.addthis.com/dashboard to customize your tools.
-add_this_id: ra-5dba7c991d31dc5a
+#add_this_id: ra-5dba7c991d31dc5a
 
 
 # ---------------------------------------------------------------

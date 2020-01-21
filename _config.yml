@@ -7,13 +7,13 @@ title: 黑暗料理店
 subtitle:
 description:   想把我写给你听。
 keywords:
-author: Maou
+author: 猫无
 language: zh-CN #en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://ifnot.fun
+url: https://blog.ifnot.fun
 root: /
 permalink: :year/:month/:title/ #:year/:id/  #:year/:month/:day/:title/
 permalink_defaults:
