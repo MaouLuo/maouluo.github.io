@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/d_128png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/d_32.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/d_16.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/d.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="黑暗料理店" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+
+
+
+  <meta name="description" content="一、为什么要使用邮件随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。">
+<meta name="keywords" content="邮件,功能模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于邮件系统设计，你需要知道这几个要点">
+<meta property="og:url" content="https://blog.ifnot.fun/pm/200417/index.html">
+<meta property="og:site_name" content="黑暗料理店">
+<meta property="og:description" content="一、为什么要使用邮件随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2020/02/7TaIPPsszupgRelQgG5j.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2020/02/SnmdfUsu2gpX82ut7pic.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2020/02/8wJDLiRYp0zwLSpP9UDP.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2020/02/XUS3pOcaYAj60w0zrxYq.png">
+<meta property="og:updated_time" content="2020-04-17T06:29:51.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于邮件系统设计，你需要知道这几个要点">
+<meta name="twitter:description" content="一、为什么要使用邮件随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。">
+<meta name="twitter:image" content="http://image.woshipm.com/wp-files/2020/02/7TaIPPsszupgRelQgG5j.png">
+  <link rel="canonical" href="https://blog.ifnot.fun/pm/200417/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+
+
+
+  <title>关于邮件系统设计，你需要知道这几个要点 | 黑暗料理店</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?778a5c914669bf2fd34e6b6a33083f74";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title";>黑暗料理店</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-pm">
+      
+    
+
+    <a href="/categories/pm/" rel="section"><i class="fa fa-fw fa-product-hunt"></i>产品</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.ifnot.fun/pm/200417/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="猫无">
+      <meta itemprop="description" content="想把我写给你听。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黑暗料理店">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            关于邮件系统设计，你需要知道这几个要点
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-17 10:59:55" itemprop="dateCreated datePublished" datetime="2020-04-17T10:59:55+08:00">2020-04-17</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pm/" itemprop="url" rel="index">
+                    <span itemprop="name">产品</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/pm/200417/" class="post-meta-item leancloud_visitors" data-flag-title="关于邮件系统设计，你需要知道这几个要点" title="温度">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-thermometer-quarter"></i>
+              </span>
+              <span class="post-meta-item-text">温度：</span>
+              <span class="leancloud-visitors-count"></span>
+              <span>℃</span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/pm/200417/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/pm/200417/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、为什么要使用邮件"><a href="#一、为什么要使用邮件" class="headerlink" title="一、为什么要使用邮件"></a>一、为什么要使用邮件</h2><p>随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。</p><a id="more"></a>
+<p>那为何还要产品设计邮件功能呢？因其有如下几个优点：</p>
+<ol>
+<li>表现性。邮件可承载更多内容，格式化文字、活动宣传图、文档附件等，这是与短信最大区别之处。</li>
+<li>正式性。邮件拥有标准化的发件人姓名、地址、内容主题，可显示Logo或签名等标识性信息，对于商业内容的传输远比一串数字更为正式。</li>
+<li>针对性。可根据用户网页行为的跟踪信息描绘出恰当的用户画像，以推送可能感兴趣的邮件内容。</li>
+</ol>
+<p>所以在没有合适替代品的情况下，邮箱对于产品重要性不言而喻。既然如此，该如何设计邮件模块呢？</p>
+<h2 id="二、邮件内容分类"><a href="#二、邮件内容分类" class="headerlink" title="二、邮件内容分类"></a>二、邮件内容分类</h2><p>首先，我们需要知道邮件类型，而大多数产品会涉及到的邮件可简单分为三类：</p>
+<h3 id="1-账号安全类邮件"><a href="#1-账号安全类邮件" class="headerlink" title="1. 账号安全类邮件"></a>1. 账号安全类邮件</h3><p>该类型邮件主要用以告知账号相关信息。如发送验证码，用户可在平板、电脑端完成接收和复制填写，免去查看手机短信的操作；又如重要绑定信息更改提醒邮件可帮助用户溯源等，同时即使在遗失手机的场景下也能完成对手机号等安全信息更改。产品所有生命周期均可添加该类邮件功能。</p>
+<p>此类邮件内容应简洁明了，摈弃花哨的图片和样式，以突显核心信息。此外因用户存在多账号或账号遗忘情况，应在邮件内明示事件所涉账号，并告知用户本次事件的影响和可采取的后续行动，例如绑定信息更改后会造成哪些功能变动，以及本次事件非本人操作引起该如何保障自身权益等信息。</p>
+<img src="http://image.woshipm.com/wp-files/2020/02/7TaIPPsszupgRelQgG5j.png" style="margin:auto">
+
+<h3 id="2-产品功能类邮件"><a href="#2-产品功能类邮件" class="headerlink" title="2. 产品功能类邮件"></a>2. 产品功能类邮件</h3><p>该类型主要与产品核心功能相关，如京东购物会发送一封订单邮件，以告知客户账号发送交易行为；当有人在社交产品中对用户或用户作品进行评论、点赞、关注等操作时，也可发送相应邮件以促进用户参与感，提升满足感。</p>
+<p>这类邮件一般内容较多，展示样式丰富，如带有图片、表格、链接等，使用网页网页展示更易用户阅读，观看体验好。产品初期除非明确用户对该类邮件的确实需求，否则不建议添加，应把开发资源更多投入到核心服务能力提升上。</p>
+<p>此类邮件因涉及产品核心业务，需注意保护用户重要信息，避免泄露。如在前端显示时使用星号等特殊字符替换部分明文，在传输过程中对数据进行加密处理，以减少黑客拦截网络通信、或网站缓存被盗取而造成信息泄露等特殊情况出现的可能性。安全的防护将增加用户对产品的信任感。</p>
+<img src="http://image.woshipm.com/wp-files/2020/02/SnmdfUsu2gpX82ut7pic.png" style="margin:auto">
+
+<h3 id="3-业务营销类"><a href="#3-业务营销类" class="headerlink" title="3. 业务营销类"></a>3. 业务营销类</h3><p>该类型邮件主要涉及到产品的推广和运营活动。如产品介绍，老用户召回等。这类邮件与产品核心业务息息相关但也最容易被过滤为垃圾邮件，所以应花大量精力用于内容设计并克制再克制地去发送邮件。</p>
+<p>对于大多数产品而言该类邮件仅应渡过初期之后开始增加使用。在产品早期，缺少精确的用户画像，在茫茫邮件中去寻找目标用户无异于海底捞针，营销效果远不如地推、投屏等区域性广告。</p>
+<p>而随着产品周期推进，拥有了越来越详细的用户数据后，可向不同用户提供最能触及真实渴求的内容，如对从不看推广邮件的用户减少发送频率；对追求性价比用户推送着重优惠活动；对愿意尝试创新用户推送新品介绍；对推广转化率高的用户推送相似产品或服务等，这样才更能发挥营销邮件的功效。</p>
+<p>当然每次活动邮件应紧密围绕一个主题去展开发挥，因为多核心内容等于全非核心内容。</p>
+<img src="http://image.woshipm.com/wp-files/2020/02/8wJDLiRYp0zwLSpP9UDP.png" style="margin:auto">
+
+<h2 id="三、邮件触发行为"><a href="#三、邮件触发行为" class="headerlink" title="三、邮件触发行为"></a>三、邮件触发行为</h2><p>在确定邮件类型情况下，我们应该知晓何时触发何种邮件，触发行为也可按三类划分：</p>
+<h3 id="1-操作行为"><a href="#1-操作行为" class="headerlink" title="1. 操作行为"></a>1. 操作行为</h3><p>操作行为指用户与产品进行交互，如登录账号、购买/销售商品等。操作行为触发的邮件以重要信息告知为主，包含安全和功能类邮件。需要做到即时发送，或至少应满足能在1分钟内送达，过长等待时间将极大降低用户体验。</p>
+<p>邮箱相当于手机通知栏，会接收来自大量产品的邮件，因此过多无意义消息不仅会招惹用户厌烦，更易导致重要邮件被无效信息淹没。应结合产品核心业务从所有触发行为中筛选出重要及必要内容以发送邮件。</p>
+<h3 id="2-系统主动推送"><a href="#2-系统主动推送" class="headerlink" title="2. 系统主动推送"></a>2. 系统主动推送</h3><p>系统主动推送指邮件系统根据设定好的时间、内容和接收地址群发或由业务部门以产品名义手动向客户发送营销邮件，该触发方式型邮件几乎可以和营销类邮件划上等号，在发送方式上同样需保持克制的理念。</p>
+<p>无论是使用第三方EDM系统还是自建服务器都需根据预算和系统能力详细规划发送次数和频率，以免投入过多资源却得不到回报或超量发送阻塞邮件通道，耽搁其他重要通信。</p>
+<p>在控制量和度的同时仍应向用户提供“拒收”功能，是否愿意被打扰的主动权应归还用户，强迫性推送只会使邮件进入垃圾箱甚至逼迫用户逃向“干净”的竞品。</p>
+<p>而有针对性的发送是终极目标，在正确时间正确地点让正确的人看到正确内容才能让推广产生最大收益。</p>
+<h3 id="3-信息订阅"><a href="#3-信息订阅" class="headerlink" title="3. 信息订阅"></a>3. 信息订阅</h3><p>订阅相较操作区别在于用户的主动性，用户主动向产品订阅或可以退订信息。如每日天气订阅，代码库更新通知，文章新评论提醒等。该触发方式以功能类邮件为主，安全和营销类为辅。</p>
+<p>需要注意的是哪些安全类邮件可以提供退订功能需要根据产品特性而定，无法同一而论，但即使退订也需要用其他方式让用户触及信息，将重要事务告知用户是产品应尽责任。</p>
+<img src="http://image.woshipm.com/wp-files/2020/02/XUS3pOcaYAj60w0zrxYq.png" style="margin:auto">
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>邮件是PC互联网时代的重要产物，虽然其信息流转方式远不如移动通知轻便，但其自身的内容表现性、商务正式性赋予了无可替代的地位，优秀的邮件设计会在产品与用户间搭建一座坚实的桥梁。</p>
+<p>好的邮件系统应该根据分类设计不同内容，含盖大部分触发方式，区分用户意愿与真实需求，同时以尊重用户选择并顾及其感受为优先，无论何时何地都不该仅为眼前利益而做出决策。</p>
+
+
+      <!-- 文章底部显示结束内容 
+      
+        <div>
+    <div></div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------The <i class="fa fa-bolt"></i> End-------------</div>
+    
+</div>
+      
+      -->
+      
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/邮件/" rel="tag"># 邮件</a>
+            
+              <a href="/tags/功能模块/" rel="tag"># 功能模块</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/tech/191106/" rel="next" title="Hexo博客——安装与部署">
+                  <i class="fa fa-chevron-left"></i> Hexo博客——安装与部署
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、为什么要使用邮件"><span class="nav-number">1.</span> <span class="nav-text">一、为什么要使用邮件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、邮件内容分类"><span class="nav-number">2.</span> <span class="nav-text">二、邮件内容分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-账号安全类邮件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 账号安全类邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-产品功能类邮件"><span class="nav-number">2.2.</span> <span class="nav-text">2. 产品功能类邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-业务营销类"><span class="nav-number">2.3.</span> <span class="nav-text">3. 业务营销类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、邮件触发行为"><span class="nav-number">3.</span> <span class="nav-text">三、邮件触发行为</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-操作行为"><span class="nav-number">3.1.</span> <span class="nav-text">1. 操作行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-系统主动推送"><span class="nav-number">3.2.</span> <span class="nav-text">2. 系统主动推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-信息订阅"><span class="nav-number">3.3.</span> <span class="nav-text">3. 信息订阅</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="猫无">
+  <p class="site-author-name" itemprop="name">猫无</p>
+  <div class="site-description" itemprop="description">想把我写给你听。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:maou@ifnot.fun" title="E-Mail &rarr; mailto:maou@ifnot.fun" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">猫无</span>
+
+<!--
+-->
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'ShaCrLgQk520CPAtBMQOhvdB-gzGzoHsz',
+    appKey: '4P7h8F3rs6Qj8AEECMV5J1zC',
+    placeholder: "Just go go",
+    avatar: 'robohash',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+
+
+             
+
+</body>
+
+
+
+</html>
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>黑暗料理店</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.ifnot.fun/"/>
+  <updated>2020-04-17T06:29:51.379Z</updated>
+  <id>https://blog.ifnot.fun/</id>
+  
+  <author>
+    <name>猫无</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于邮件系统设计，你需要知道这几个要点</title>
+    <link href="https://blog.ifnot.fun/pm/200417/"/>
+    <id>https://blog.ifnot.fun/pm/200417/</id>
+    <published>2020-04-17T02:59:55.000Z</published>
+    <updated>2020-04-17T06:29:51.379Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、为什么要使用邮件"><a href="#一、为什么要使用邮件" class="headerlink" title="一、为什么要使用邮件"></a>一、为什么要使用邮件</h2><p>随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。</p><a id="more"></a><p>那为何还要产品设计邮件功能呢？因其有如下几个优点：</p><ol><li>表现性。邮件可承载更多内容，格式化文字、活动宣传图、文档附件等，这是与短信最大区别之处。</li><li>正式性。邮件拥有标准化的发件人姓名、地址、内容主题，可显示Logo或签名等标识性信息，对于商业内容的传输远比一串数字更为正式。</li><li>针对性。可根据用户网页行为的跟踪信息描绘出恰当的用户画像，以推送可能感兴趣的邮件内容。</li></ol><p>所以在没有合适替代品的情况下，邮箱对于产品重要性不言而喻。既然如此，该如何设计邮件模块呢？</p><h2 id="二、邮件内容分类"><a href="#二、邮件内容分类" class="headerlink" title="二、邮件内容分类"></a>二、邮件内容分类</h2><p>首先，我们需要知道邮件类型，而大多数产品会涉及到的邮件可简单分为三类：</p><h3 id="1-账号安全类邮件"><a href="#1-账号安全类邮件" class="headerlink" title="1. 账号安全类邮件"></a>1. 账号安全类邮件</h3><p>该类型邮件主要用以告知账号相关信息。如发送验证码，用户可在平板、电脑端完成接收和复制填写，免去查看手机短信的操作；又如重要绑定信息更改提醒邮件可帮助用户溯源等，同时即使在遗失手机的场景下也能完成对手机号等安全信息更改。产品所有生命周期均可添加该类邮件功能。</p><p>此类邮件内容应简洁明了，摈弃花哨的图片和样式，以突显核心信息。此外因用户存在多账号或账号遗忘情况，应在邮件内明示事件所涉账号，并告知用户本次事件的影响和可采取的后续行动，例如绑定信息更改后会造成哪些功能变动，以及本次事件非本人操作引起该如何保障自身权益等信息。</p><img src="http://image.woshipm.com/wp-files/2020/02/7TaIPPsszupgRelQgG5j.png" style="margin:auto"><h3 id="2-产品功能类邮件"><a href="#2-产品功能类邮件" class="headerlink" title="2. 产品功能类邮件"></a>2. 产品功能类邮件</h3><p>该类型主要与产品核心功能相关，如京东购物会发送一封订单邮件，以告知客户账号发送交易行为；当有人在社交产品中对用户或用户作品进行评论、点赞、关注等操作时，也可发送相应邮件以促进用户参与感，提升满足感。</p><p>这类邮件一般内容较多，展示样式丰富，如带有图片、表格、链接等，使用网页网页展示更易用户阅读，观看体验好。产品初期除非明确用户对该类邮件的确实需求，否则不建议添加，应把开发资源更多投入到核心服务能力提升上。</p><p>此类邮件因涉及产品核心业务，需注意保护用户重要信息，避免泄露。如在前端显示时使用星号等特殊字符替换部分明文，在传输过程中对数据进行加密处理，以减少黑客拦截网络通信、或网站缓存被盗取而造成信息泄露等特殊情况出现的可能性。安全的防护将增加用户对产品的信任感。</p><img src="http://image.woshipm.com/wp-files/2020/02/SnmdfUsu2gpX82ut7pic.png" style="margin:auto"><h3 id="3-业务营销类"><a href="#3-业务营销类" class="headerlink" title="3. 业务营销类"></a>3. 业务营销类</h3><p>该类型邮件主要涉及到产品的推广和运营活动。如产品介绍，老用户召回等。这类邮件与产品核心业务息息相关但也最容易被过滤为垃圾邮件，所以应花大量精力用于内容设计并克制再克制地去发送邮件。</p><p>对于大多数产品而言该类邮件仅应渡过初期之后开始增加使用。在产品早期，缺少精确的用户画像，在茫茫邮件中去寻找目标用户无异于海底捞针，营销效果远不如地推、投屏等区域性广告。</p><p>而随着产品周期推进，拥有了越来越详细的用户数据后，可向不同用户提供最能触及真实渴求的内容，如对从不看推广邮件的用户减少发送频率；对追求性价比用户推送着重优惠活动；对愿意尝试创新用户推送新品介绍；对推广转化率高的用户推送相似产品或服务等，这样才更能发挥营销邮件的功效。</p><p>当然每次活动邮件应紧密围绕一个主题去展开发挥，因为多核心内容等于全非核心内容。</p><img src="http://image.woshipm.com/wp-files/2020/02/8wJDLiRYp0zwLSpP9UDP.png" style="margin:auto"><h2 id="三、邮件触发行为"><a href="#三、邮件触发行为" class="headerlink" title="三、邮件触发行为"></a>三、邮件触发行为</h2><p>在确定邮件类型情况下，我们应该知晓何时触发何种邮件，触发行为也可按三类划分：</p><h3 id="1-操作行为"><a href="#1-操作行为" class="headerlink" title="1. 操作行为"></a>1. 操作行为</h3><p>操作行为指用户与产品进行交互，如登录账号、购买/销售商品等。操作行为触发的邮件以重要信息告知为主，包含安全和功能类邮件。需要做到即时发送，或至少应满足能在1分钟内送达，过长等待时间将极大降低用户体验。</p><p>邮箱相当于手机通知栏，会接收来自大量产品的邮件，因此过多无意义消息不仅会招惹用户厌烦，更易导致重要邮件被无效信息淹没。应结合产品核心业务从所有触发行为中筛选出重要及必要内容以发送邮件。</p><h3 id="2-系统主动推送"><a href="#2-系统主动推送" class="headerlink" title="2. 系统主动推送"></a>2. 系统主动推送</h3><p>系统主动推送指邮件系统根据设定好的时间、内容和接收地址群发或由业务部门以产品名义手动向客户发送营销邮件，该触发方式型邮件几乎可以和营销类邮件划上等号，在发送方式上同样需保持克制的理念。</p><p>无论是使用第三方EDM系统还是自建服务器都需根据预算和系统能力详细规划发送次数和频率，以免投入过多资源却得不到回报或超量发送阻塞邮件通道，耽搁其他重要通信。</p><p>在控制量和度的同时仍应向用户提供“拒收”功能，是否愿意被打扰的主动权应归还用户，强迫性推送只会使邮件进入垃圾箱甚至逼迫用户逃向“干净”的竞品。</p><p>而有针对性的发送是终极目标，在正确时间正确地点让正确的人看到正确内容才能让推广产生最大收益。</p><h3 id="3-信息订阅"><a href="#3-信息订阅" class="headerlink" title="3. 信息订阅"></a>3. 信息订阅</h3><p>订阅相较操作区别在于用户的主动性，用户主动向产品订阅或可以退订信息。如每日天气订阅，代码库更新通知，文章新评论提醒等。该触发方式以功能类邮件为主，安全和营销类为辅。</p><p>需要注意的是哪些安全类邮件可以提供退订功能需要根据产品特性而定，无法同一而论，但即使退订也需要用其他方式让用户触及信息，将重要事务告知用户是产品应尽责任。</p><img src="http://image.woshipm.com/wp-files/2020/02/XUS3pOcaYAj60w0zrxYq.png" style="margin:auto"><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>邮件是PC互联网时代的重要产物，虽然其信息流转方式远不如移动通知轻便，但其自身的内容表现性、商务正式性赋予了无可替代的地位，优秀的邮件设计会在产品与用户间搭建一座坚实的桥梁。</p><p>好的邮件系统应该根据分类设计不同内容，含盖大部分触发方式，区分用户意愿与真实需求，同时以尊重用户选择并顾及其感受为优先，无论何时何地都不该仅为眼前利益而做出决策。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一、为什么要使用邮件&quot;&gt;&lt;a href=&quot;#一、为什么要使用邮件&quot; class=&quot;headerlink&quot; title=&quot;一、为什么要使用邮件&quot;&gt;&lt;/a&gt;一、为什么要使用邮件&lt;/h2&gt;&lt;p&gt;随着手机等移动设备的普及，移动互联网发展迅猛，手机号码的重要性愈发凸显，甚至于某些产品仅以手机号作为用户身份唯一标识。同时，许多用户不仅会设置层层收件规则筛去大量推广邮件，还可能过多未读邮件而失去细看耐心，直接点击“全部已读”，致使邮件触达率降低。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="产品" scheme="https://blog.ifnot.fun/categories/pm/"/>
+    
+    
+      <category term="邮件" scheme="https://blog.ifnot.fun/tags/%E9%82%AE%E4%BB%B6/"/>
+    
+      <category term="功能模块" scheme="https://blog.ifnot.fun/tags/%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo博客——安装与部署</title>
+    <link href="https://blog.ifnot.fun/tech/191106/"/>
+    <id>https://blog.ifnot.fun/tech/191106/</id>
+    <published>2019-11-06T07:28:33.000Z</published>
+    <updated>2020-04-17T06:29:22.663Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近花时间搭建了Hexo博客，用来记录一切自己想写的内容，第一个篇正好用来写hexo相关内容。<br>原本想用虚拟主机搭个人网站，但考虑到购买费用和运维成本，且目前几乎不需要挂载任何服务，在寻找替代方案过程中遇见了<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a>。<br>Hexo是一款基于Node.js的快速、简洁且高效的免费博客框架，所有成本仅为域名购买和少许的熟悉时间，主题丰富，使用者和教程数不胜数，而且文档有中文版，对于小白十分友好。</p><a id="more"></a>  <p>第一部分：安装与部署<br>第二部分：博客使用<br>第三部分：Next主题优化<br>第四部分：第三方插件引入</p><h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>在安装hexo之前需要安装另两个程序：</p><ul><li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a></li><li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>  </li></ul><p>在上面链接中下载、安装对应版本就可以开始hexo安装了。<br>先创建一个文件夹hexo，然后cd到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。输入以下指令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>使用hexo -v查看是否安装成功。<br>接下来初始化hexo</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure><p>blog可以改成任意名字，只要记住hexo安装于此就行。<br>之后进入blog目录安装npm</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog //进入这个blog目录</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure><p>随后blog目录下会生成多个目录。</p><ul><li>node_modules: 依赖包</li><li>public：存放生成的页面</li><li>scaffolds：生成文章的一些模板</li><li>source：用来存放你的文章</li><li>themes：hexo主题</li><li>_config.yml: 博客的配置文件</li></ul><p>输入以下命令既可在本地查看生成的博客：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo cl </span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure><p>后续修改博客配置后重新生成本地版本都使用上述命令，也可以使用混合版本:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo cl &amp; g &amp; s</span><br></pre></td></tr></table></figure><h2 id="2-部署"><a href="#2-部署" class="headerlink" title="2.部署"></a>2.部署</h2><p>部署使用github和coding，做到在解析域名后境外线路进入部署在github上的博客，境内线路访问coding上的博客，避免线路延迟。</p><h4 id="部署博客到github"><a href="#部署博客到github" class="headerlink" title="部署博客到github"></a>部署博客到github</h4><p>下面先介绍<a href="https://github.com/login" target="_blank" rel="noopener">github</a>部署。<br>登录github账号后创建一个新仓库。<br><img src="https://i.loli.net/2019/11/06/GNQsfHiWZbjAezn.png" alt="新建仓库"></p><p>仓库名字填写格式为xxx.github.io，其中xxx为你的github用户名，正确填后部署到GitHub page的时才会被识别。MaouLuo为我的用户名，改成自己的就行。<br><img src="https://i.loli.net/2019/11/06/fsFRN3zJq8uDSMH.png" alt="仓库名填写"></p><p>回到git bash中输入以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;name&quot;</span><br><span class="line">git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure><p>其中name部分替换成你的github用户名，email替换成你的github邮箱。<br>然后创建SSH,一直回车</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;email&quot;</span><br></pre></td></tr></table></figure><p>email替换同上一步，然后会显示生成的SSH所在路径。<br>SSH目录中id_rsa是你这台电脑的私人秘钥，id_rsa.pub是公共秘钥，举个不够恰当的栗子，公钥就是首付款的二维码，私钥则是付款密码，需自己藏好。<br>在github中保存你公钥，右上角头像 &gt; Settings &gt; SSH and GPG keys &gt; New SSH key &gt; key &gt; 粘贴公钥中内容</p><p>查看是否保存成功。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><p>这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为<br>YourgithubName就是你的GitHub账户</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>然后</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo cl</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>注意deploy时可能要你输入username和password。</p><p>过一会儿输入<a href="http://name.github.io后就能查看博客的线上版本。" target="_blank" rel="noopener">http://name.github.io后就能查看博客的线上版本。</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近花时间搭建了Hexo博客，用来记录一切自己想写的内容，第一个篇正好用来写hexo相关内容。&lt;br&gt;原本想用虚拟主机搭个人网站，但考虑到购买费用和运维成本，且目前几乎不需要挂载任何服务，在寻找替代方案过程中遇见了&lt;a href=&quot;https://hexo.io/zh-cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;。&lt;br&gt;Hexo是一款基于Node.js的快速、简洁且高效的免费博客框架，所有成本仅为域名购买和少许的熟悉时间，主题丰富，使用者和教程数不胜数，而且文档有中文版，对于小白十分友好。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://blog.ifnot.fun/categories/tech/"/>
+    
+    
+      <category term="hexo" scheme="https://blog.ifnot.fun/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
