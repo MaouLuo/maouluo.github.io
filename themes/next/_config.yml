@@ -126,10 +126,10 @@ scheme: Mist
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
 # http://www.fontawesome.com.cn/faicons/   图标库
-menu: # 直接以分类名新建路由即可访问
+menu: # 现在\public\categories\目录下创建想要显示的分类名文件夹，然后直接以分类名新建路由即可访问，在文章categories属性中添加对应分类名即可访问
   home: / || home
   #about: /about/ || user
-  products: /categories/产品/ || product-hunt
+  pm: /categories/pm/ || product-hunt
   tags: /tags/ || tags
   #categories: /categories/ || th    
   #archives: /archives/ || link

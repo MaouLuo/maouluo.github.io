@@ -1,5 +1,6 @@
 ---
 title: Hexo博客——安装与部署
+id: 191106
 date: 2019-11-06 15:28:33
 tags: hexo
 categories: 技术

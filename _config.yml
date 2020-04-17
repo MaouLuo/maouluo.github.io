@@ -15,7 +15,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://blog.ifnot.fun
 root: /
-permalink: :year/:month/:title/ #:year/:id/  #:year/:month/:day/:title/
+permalink: :category/:id/ #:year/:month/:title/ #  #:year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
@@ -56,6 +56,8 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  产品: pm
+  技术: tech
 tag_map:
 
 # Date / Time format
